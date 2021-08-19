@@ -51,6 +51,7 @@ jobs:
       - run: docker-compose up --build -d
       - run: python test.py
   Deploy:
+    needs: [Docker-compose-test, Docker-image, Build]
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
