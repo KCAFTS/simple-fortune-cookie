@@ -1,6 +1,8 @@
 version: "3"
 services:
   frontend:
+    depends_on: 
+      - backend
     restart: always
     ports: 
       - 8080:8080
@@ -8,11 +10,15 @@ services:
       dockerfile: Dockerfile
       context: ./frontend
   backend:
+    depends_on: 
+      - redis
     restart: always
     build:
       dockerfile: Dockerfile
       context: ./backend
   redis:
-    image: "redis:alpine"
-    ports:
-      - 6379:6379
+    image: "redis"
+    environment: 
+      - REDIS_DNS=redis
+    expose:
+      - 6379
