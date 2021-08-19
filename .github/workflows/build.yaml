@@ -1,6 +1,15 @@
 name: Simple Fortune Cookie
 on: push
 jobs:
+  Clone-down:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - name: Upload repo
+          uses: actions/upload-artifact@v2
+          with:
+            name: code
+            path: .
   Build:
     runs-on: ubuntu-latest
     container: golang:bullseye
