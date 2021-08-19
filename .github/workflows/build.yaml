@@ -37,7 +37,13 @@ jobs:
         with:
           context: ./frontend
           push: true
-          tags: ${{ env.docker_username }}/fortune_cookie:latest
+          tags: ${{ env.docker_username }}/cookie-frontend:latest
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: ./backend
+          push: true
+          tags: ${{ env.docker_username }}/cookie-backend:latest
   Docker-compose-test:
     runs-on: ubuntu-latest
     steps:
