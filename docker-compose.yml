@@ -12,13 +12,13 @@ services:
   backend:
     depends_on: 
       - redis
+    environment: 
+      - REDIS_DNS=redis
     restart: always
     build:
       dockerfile: Dockerfile
       context: ./backend
   redis:
     image: "redis"
-    environment: 
-      - REDIS_DNS=redis
     expose:
       - 6379
