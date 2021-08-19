@@ -1,0 +1,17 @@
+name: Simple Fortune Cookie
+on: [push, pull_request]
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    container: golang:bullseye
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build go
+        uses: actions/setup-go@v2
+      - run: cd ./frontend && go build && go test
+      - run: cd ./backend && go build 
+      - name: Upload repo
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: .
