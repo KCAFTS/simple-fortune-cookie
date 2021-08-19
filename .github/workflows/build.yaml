@@ -50,10 +50,9 @@ jobs:
       - uses: actions/checkout@v2
       - run: docker-compose up --build -d
       - run: python test.py
-  Test:
+  Deploy:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
-      - run: docker-compose up --build -d
-      - run: python test.py
+      - run: ./scripts/deploy.sh
 
