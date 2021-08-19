@@ -1,3 +1,6 @@
+env:
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
+  docker_password: ${{ secrets.DOCKER_PASSWORD }}
 name: Simple Fortune Cookie
 on: [push, pull_request]
 jobs:
@@ -15,3 +18,22 @@ jobs:
         with:
           name: code
           path: .
+  Docker-image:
+    needs: [Build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+      - name: Login to Dockerhub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ env.docker_username }}
+          password: ${{ env.docker_password }}
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: my-org/my-image:latest
