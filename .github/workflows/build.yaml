@@ -15,10 +15,10 @@ jobs:
     container: golang:bullseye
     steps:
       - name: Download
-          uses: actions/download-artifact@v2
-          with:
-            name: code
-            path: .
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
       - name: Build go
         uses: actions/setup-go@v2
       - run: cd ./frontend go build
